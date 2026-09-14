@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://manishk050.github.io/mental-math/sitemap.xml
