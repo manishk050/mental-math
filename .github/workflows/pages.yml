@@ -27,6 +27,17 @@ jobs:
         uses: actions/configure-pages@v5
         with:
           enablement: true
+      - name: Add Google Search Console verification
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path("index.html")
+          s = p.read_text(encoding="utf-8")
+          tag = '<meta name="google-site-verification" content="XtDZ83mVPu3LmkhfQzhxs46u5IxmAtiWl97XLdtlC_s">'
+          if "google-site-verification" not in s:
+              s = s.replace('<meta name="viewport" content="width=device-width,initial-scale=1">', '<meta name="viewport" content="width=device-width,initial-scale=1">\\n' + tag, 1)
+              p.write_text(s, encoding="utf-8")
+          PY
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
